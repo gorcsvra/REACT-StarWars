@@ -30,14 +30,19 @@ state = {
     ]
 }
 
-onClickHandle  = (index) =>_=> {
-console.log(index)
+onClickHandle  = (index) => _ => {
+    this.setState({
+        characters: this.state.characters.map((char, charIndex) =>
+        ( (charIndex === index) ? ({...char, selected: true}) : ({...char, selected: false}) )
+    )
+});
 }
-    render() {
+
+render() {
         return(
             <div>
                 <ButtonList onClickFunc={this.onClickHandle} characters={this.state.characters}/>
-                <Character/>
+                <Character selectedChar={this.state.characters.find(char => char.selected)} />
             </div>
         );
     }
